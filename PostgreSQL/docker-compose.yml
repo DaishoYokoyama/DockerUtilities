@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    networks:
+        - internal
+    environment: 
+      POSTGRES_DB: test
+      POSTGRES_NAME: admin                        # db login user
+      POSTGRES_PASSWORD: admin                    # db login pass
+      POSTGRES_INITDB_ARGS: "--encording=UTF-8"
+    ports: 
+      - "5432:5432"
+    volumes:
+        - ./mnt/postgresql:/var/lib/postgresql
+    restart: always
+
+  pgadmim:
+    image: dpage/pgadmin4
+    container_name: pgadmim4
+    networks:
+        - internal
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin                # login user name.
+      PGADMIN_DEFAULT_PASSWORD: admin             # login password
+    ports:
+      - "8765:80"
+    volumes:
+      - ./mnt/pgadmin:/var/lib/pgadmin
+    restart: always
+
+networks:
+  internal: 
+    driver: bridge
