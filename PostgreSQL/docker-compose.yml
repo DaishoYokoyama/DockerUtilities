@@ -7,10 +7,9 @@ services:
     networks:
         - internal
     environment: 
-      POSTGRES_DB: test
-      POSTGRES_NAME: admin                        # db login user
-      POSTGRES_PASSWORD: admin                    # db login pass
-      POSTGRES_INITDB_ARGS: "--encording=UTF-8"
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     ports: 
       - "5432:5432"
     volumes:
@@ -23,8 +22,8 @@ services:
     networks:
         - internal
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin                # login user name.
-      PGADMIN_DEFAULT_PASSWORD: admin             # login password
+      PGADMIN_DEFAULT_EMAIL: admin
+      PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - "8765:80"
     volumes:
@@ -32,5 +31,4 @@ services:
     restart: always
 
 networks:
-  internal: 
-    driver: bridge
+  internal:
